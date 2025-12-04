@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog </title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+       
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center min-h-screen font-sans">
+
+   
+    <div class="w-[95%] md:w-[70%] py-10 flex flex-col gap-6 relative">
+        <h1 class="text-4xl font-bold text-center text-blue-700">Blogs </h1>
+
+    
+        <div class="flex flex-col md:flex-row justify-between gap-4 sticky top-0  z-10 py-2 ">
+          
+            <div class="relative w-full ">
+                <input type="text" id="search-input" 
+                       class="w-full border border-gray-300 rounded-lg h-[45px] pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm" 
+                       placeholder="Search...">
+              
+            </div>
+
+            
+        </div>
+
+        <div class="flex items-center gap-3">
+            <span class="border border-blue-600 text-blue-600 bg-white px-4 py-1.5 rounded hover:bg-blue-50 transition active:bg-blue-100">Thêm mới</span>
+            <button id="sort-newest" class="border border-blue-600 text-blue-600 bg-white px-4 py-1.5 rounded hover:bg-blue-50 transition active:bg-blue-100">
+                Mới nhất
+            </button>
+            <button id="sort-oldest" class="border border-gray-400 text-gray-600 bg-white px-4 py-1.5 rounded hover:bg-gray-200 transition">
+                 Cũ nhất
+            </button>
+        </div>
+
+        
+        <div id="blog-list-container" class="grid grid-cols-1 gap-6 mt-2">
+            <!-- Nội dung sẽ được JS chèn vào đây -->
+            <div class="text-center text-gray-500 py-10">Đang tải dữ liệu...</div>
+        </div>
+    </div>
+
+    
+    <div id="detail-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex justify-center items-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden relative animate-fade-in">
+            
+            <!-- Nút đóng -->
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-2xl z-10">
+                <i class="fa-solid fa-times"></i>
+            </button>
+
+            <!-- Loading Spinner  khi đang gọi API  -->
+            <div id="modal-loading" class="hidden flex flex-col justify-center items-center h-64">
+                <div class="loader mb-3"></div>
+                <p class="text-gray-500">Đang tải chi tiết bài viết...</p>
+            </div>
+
+            <!-- Nội dung Modal -->
+            <div id="modal-content" class="p-8 max-h-[80vh] overflow-y-auto hidden">
+                <div class="flex items-center gap-2 mb-4">
+    
+                    <span id="modal-tags" class="text-sm text-gray-500 italic"></span>
+                </div>
+                <h2 id="modal-title" class="text-3xl font-bold text-gray-800 mb-4 leading-tight">Title Here</h2>
+                
+                
+
+                <p id="modal-body" class="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
+                    Content goes here...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
