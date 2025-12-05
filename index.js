@@ -1,6 +1,8 @@
 
 const BASE_URL = 'https://dummyjson.com/posts';
-
+fetch('https://dummyjson.com/posts')
+.then(res => res.json())
+.then(console.log);
 // thẻ htmlel
 const blogListContainer = document.getElementById('blog-list-container');
 const searchInput = document.getElementById('search-input');
@@ -69,10 +71,10 @@ function renderPosts(posts) {
                    
                     <div class="flex gap-2" onclick="event.stopPropagation()">
                         <button class="text-yellow-500 hover:text-yellow-600 px-2 py-1 border border-yellow-500 rounded text-sm transition hover:bg-yellow-50">
-                            <i class="fa-solid fa-pen"></i> Sửa
+                             Sửa
                         </button>
                         <button class="text-red-500 hover:text-red-600 px-2 py-1 border border-red-500 rounded text-sm transition hover:bg-red-50">
-                            <i class="fa-solid fa-trash"></i> Xóa
+                             Xóa
                         </button>
                     </div>
                 </div>
@@ -86,7 +88,8 @@ function renderPosts(posts) {
 // chức năng tìm kiếm
 searchInput.addEventListener('input', (e) => {
     const keyword = e.target.value.trim();
-
+  console.log(keyword.replaceAll("<","*").replaceAll(">","*").replaceAll("@","*"));
+  
     //  Chờ người dùng dừng gõ 500ms mới gọi API
     clearTimeout(fetchTimeout);
     fetchTimeout = setTimeout(() => {
@@ -98,6 +101,10 @@ searchInput.addEventListener('input', (e) => {
             fetchPosts(BASE_URL);
         }
     }, 500);
+   
+   
+    
+    
 });
 
 // chức năng sắp xếp
